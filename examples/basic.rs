@@ -31,7 +31,7 @@ fn main() {
     eframe::run_native(
         "testing",
         Default::default(),
-        Box::new(|_| Box::new(Gui::new())),
+        Box::new(|_| Ok(Box::new(Gui::new()))),
     )
     .unwrap();
 }

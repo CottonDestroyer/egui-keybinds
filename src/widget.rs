@@ -78,7 +78,7 @@ impl KeyBindWidget<'_> {
             }
         }
 
-        return false;
+        false
     }
 
     fn check_keys(
@@ -98,10 +98,7 @@ impl KeyBindWidget<'_> {
     }
 
     fn read_states(&mut self, ui: &mut Ui) -> (DeviceState, KeyBindWidgetState) {
-        let device_state = ui.data_mut(|d| {
-            d.get_temp(DEVICE_STATE_ID.clone())
-                .unwrap_or(DeviceState::new())
-        });
+        let device_state = ui.data_mut(|d| d.get_temp(*DEVICE_STATE_ID).unwrap_or_default());
 
         let state = ui.data_mut(|d| d.get_temp(self.id).unwrap_or(KeyBindWidgetState::new()));
 
@@ -110,7 +107,7 @@ impl KeyBindWidget<'_> {
 
     fn save_states(&mut self, ui: &mut Ui, device: DeviceState, state: KeyBindWidgetState) {
         ui.data_mut(|d| {
-            d.insert_temp(DEVICE_STATE_ID.clone(), device);
+            d.insert_temp(*DEVICE_STATE_ID, device);
             d.insert_temp(self.id, state);
         });
     }
@@ -124,7 +121,7 @@ impl Widget for KeyBindWidget<'_> {
 
         let visuals = ui.style().interact_selectable(&response, state.active); // get the current interactable style settings
 
-        painter.rect_filled(response.rect, visuals.rounding, visuals.bg_fill); // draw a lil button :)
+        painter.rect_filled(response.rect, visuals.corner_radius, visuals.bg_fill); // draw a lil button :)
 
         painter.text(
             response.rect.center(),
@@ -169,6 +166,6 @@ impl Widget for KeyBindWidget<'_> {
         };
 
         self.save_states(ui, device, saved_state);
-        return response;
+        response
     }
 }

@@ -362,7 +362,7 @@ impl From<device_query::Keycode> for KeyCode {
 
 impl KeyCode {
     pub fn as_modifier(&self) -> Option<KeyModifier> {
-        return match self {
+        match self {
             KeyCode::LControl => Some(KeyModifier::CtrlCmd),
             KeyCode::RControl => Some(KeyModifier::CtrlCmd),
             KeyCode::RAlt => Some(KeyModifier::AltOpt),
@@ -378,7 +378,7 @@ impl KeyCode {
             KeyCode::LShift => Some(KeyModifier::Shift),
             KeyCode::RShift => Some(KeyModifier::Shift),
             _ => None,
-        };
+        }
     }
 }
 

@@ -39,7 +39,7 @@ impl KeyBind {
                     prefix.push(modifier.serialize());
                 }
 
-                return format!("{}{}", prefix, k.serialize());
+                format!("{}{}", prefix, k.serialize())
             }
 
             None => "...".to_string(),
@@ -51,7 +51,7 @@ impl KeyBind {
 
         let mut modifiers: Vec<KeyModifier> = vec![];
 
-        for (i, ch) in data.chars().enumerate() {
+        for (i, ch) in data.char_indices() {
             let deserialized_modifier = KeyModifier::deserialize(ch);
 
             match deserialized_modifier {
@@ -62,14 +62,10 @@ impl KeyBind {
 
                     let deserialized_key = KeyCode::deserialize(name_slice.to_string());
 
-                    match deserialized_key {
-                        Ok(key) => {
-                            let mods = if key.is_some() { modifiers } else { vec![] };
+                    if let Ok(key) = deserialized_key {
+                        let mods = if key.is_some() { modifiers } else { vec![] };
 
-                            result = Ok(Self::new(key, mods));
-                        }
-
-                        _ => (),
+                        result = Ok(Self::new(key, mods));
                     }
 
                     break;
