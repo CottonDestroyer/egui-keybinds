@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use once_cell::sync::Lazy;
 
 #[allow(dead_code)]
-#[derive(PartialEq, Clone, Hash, Eq)]
+#[derive(PartialEq, Clone, Hash, Eq, Debug)]
 pub enum KeyCode {
     Escape,
     F1,
@@ -383,7 +383,7 @@ impl KeyCode {
 }
 
 // include discriminant and Ord for Vec<KeyModifier>.sort(), should end up as: Control, Alt, Shift, Fn
-#[derive(PartialEq, Clone, PartialOrd, Eq, Ord, Hash)]
+#[derive(PartialEq, Clone, PartialOrd, Eq, Ord, Hash, Debug)]
 pub enum KeyModifier {
     CtrlCmd = 1,  // Control, Left or Right + Command, Left or Right
     AltOpt = 2,   // Alt on windows, Option on MacOS

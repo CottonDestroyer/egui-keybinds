@@ -10,7 +10,7 @@ pub mod widget;
 pub use keycodes::*;
 pub use widget::*;
 
-#[derive(Clone, Hash)]
+#[derive(Clone, Hash, Debug)]
 pub struct KeyBind {
     pub key: Option<KeyCode>,
     pub modifiers: Vec<KeyModifier>,
