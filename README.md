@@ -4,7 +4,7 @@ designed for ease-of-use, **egui-keybinds** provides keybinding functionality to
 # Example
 
 ```rust
-use egui::{CentralPanel, Context, Widget};
+use eframe::egui::{CentralPanel, Context, Widget};
 use egui_keybinds::{KeyBind, KeyBindWidget, KeyCode};
 
 struct Gui {
@@ -37,7 +37,7 @@ fn main() {
     eframe::run_native(
         "testing",
         Default::default(),
-        Box::new(|_| Box::new(Gui::new())),
+        Box::new(|_| Ok(Box::new(Gui::new()))),
     )
     .unwrap();
 }
